@@ -6,30 +6,31 @@ import StarRating from "./components/star-rating";
 import LoadMoreData from "./components/load-more-data"
 import TreeView from "./components/tree-view";
 import menus from "./components/tree-view/data";
+import QRCodeGenerator from "./components/qr-code-generator";
 
 function App() {
   return (
     <div className="App">
-      {/* <Accordian />
+      {/* <Accordian /> */}
 
-      <RandomColor/>
+      {/* <RandomColor/> */}
 
-      <StarRating noOfStar={10}/>
+      {/* <StarRating noOfStar={10}/> */}
 
-      <ImageSlider
+      {/* <ImageSlider
         url={'https://picsum.photos/v2/list'}
         page={"1"}
         limit={"5"}
-      />
-      */}
-
+      /> */}
+      
+      
       {/* <LoadMoreData /> */}
 
 
       {/* <TreeView menus={menus} /> */}
 
 
-      
+      <QRCodeGenerator />
 
     </div>
   );
