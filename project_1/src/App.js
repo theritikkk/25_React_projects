@@ -15,6 +15,8 @@ import GithubProfileFinder from "./components/github-profile-finder";
 import SearchAutoComplete from "./components/search-autocomplete-with-api";
 import FeatureFlags from "./components/feature-flag";
 import FeatureFlagsGlobalState from "./components/feature-flag/context";
+import UseFetchHookTest from "./components/use-fetch/test";
+import UseOnClickOutsideTest from "./components/use-outside-click/test";
 
 function App() {
   return (
@@ -53,9 +55,14 @@ function App() {
 
       {/* <SearchAutoComplete /> */}
       
-      <FeatureFlagsGlobalState>
+      {/* <FeatureFlagsGlobalState>
         <FeatureFlags />
-      </FeatureFlagsGlobalState>
+      </FeatureFlagsGlobalState> */}
+
+      {/* <UseFetchHookTest /> */}
+
+      <UseOnClickOutsideTest />
+
 
     </div>
   );
