@@ -1,9 +1,6 @@
 import useWindowResize from "./index"
 
 
-
-
-
 export default function UseWindowResizeTest() {
 
     const windowSize = useWindowResize();
