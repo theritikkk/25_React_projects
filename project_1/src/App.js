@@ -27,53 +27,52 @@ function App() {
 
     <div className="App">
 
-      {/* <Accordian /> */}
+      <Accordian />
 
-      {/* <RandomColor/> */}
+      RandomColor/>
 
-      {/* <StarRating noOfStar={10}/> */}
+      <StarRating noOfStar={10}/>
 
-      {/* <ImageSlider
+      <ImageSlider
         url={'https://picsum.photos/v2/list'}
         page={"1"}
         limit={"5"}
-      /> */}
+
       
       
-      {/* <LoadMoreData /> */}
+      <LoadMoreData />
+
+      <TreeView menus={menus} />
 
 
-      {/* <TreeView menus={menus} /> */}
+      <QRCodeGenerator />
 
 
-      {/* <QRCodeGenerator /> */}
+      <LightDarkMode />
 
+      <ScrollIndicator url={'https://dummyjson.com/products?limit=100'} />
 
-      {/* <LightDarkMode /> */}
+       < TabsTest />
 
-      {/* <ScrollIndicator url={'https://dummyjson.com/products?limit=100'} /> */}
+      <ModalTest />
 
-      {/* < TabsTest /> */}
+       <GithubProfileFinder /> 
 
-      {/* <ModalTest /> */}
-
-      {/* <GithubProfileFinder /> */}
-
-      {/* <SearchAutoComplete /> */}
+       <SearchAutoComplete />
       
-      {/* <FeatureFlagsGlobalState>
+      <FeatureFlagsGlobalState>
         <FeatureFlags />
-      </FeatureFlagsGlobalState> */}
+      </FeatureFlagsGlobalState>
 
-      {/* <UseFetchHookTest /> */}
+      <UseFetchHookTest />
 
-      {/* <UseOnClickOutsideTest /> */}
+      <UseOnClickOutsideTest />
 
-      {/* <UseWindowResizeTest /> */}
+      <UseWindowResizeTest />
 
-      {/* <ScrollToTopAndToBottom /> */}
+      <ScrollToTopAndToBottom />
 
-      {/* <ScrollToSection /> */}
+      <ScrollToSection />
 
       
       
