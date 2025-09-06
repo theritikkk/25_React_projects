@@ -1,47 +1,54 @@
 import { useState } from "react";
-import { FaStumbleuponCircle } from "react-icons/fa";
 import QRCode from "react-qr-code";
-
-
-
+import './style.css';
 
 export default function QRCodeGenerator() {
+    
+    // State for input value
+    const [input, setInput] = useState('');
 
-    const[qrCode, setQrCode] = useState('');
-    const[input, setInput] = useState('');
+    // State for generated QR code value
+    const [qrCode, setQrCode] = useState('');
 
+    // Function to generate QR code from input
     function handleGenerateQrCode() {
-        setQrCode(input)
+        setQrCode(input);
     }
 
     return (
-    
-    <div>
-        <h1> QR Code Generator </h1>
-        <div>
-            <input onChange={ (e) => setInput(e.target.value) } 
-                type="text" 
-                name="qr-code" 
-                placeholder="Enter your value here"
-            />
+        <div className="qr-code-generator">
 
-            <button 
-                disabled={ input && input.trim() !== '' ? false : true }
-                onClick={handleGenerateQrCode}> 
-                Generate
-            </button>
+            <h1>QR Code Generator</h1>
+
+            {/* Input field and Generate button */}
+            <div className="input-section">
+                <input 
+                    type="text"
+                    name="qr-code"
+                    placeholder="Enter your value here"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                />
+                <button 
+                    disabled={!input.trim()} // Disable button if input is empty
+                    onClick={handleGenerateQrCode}
+                >
+                    Generate
+                </button>
+            </div>
+
+            {/* Display QR Code */}
+            <div className="qr-code-display">
+                {qrCode && (
+                    <QRCode
+                        id="qr-code-value"
+                        value={qrCode}
+                        size={400}
+                        bgColor="#fff"
+                    />
+                )}
+            </div>
 
         </div>
-
-        <div>
-            <QRCode 
-                id="qr-code-value"
-                value={qrCode} 
-                size={400}
-                bgColor="#fff"
-            />
-        </div>
-    </div>
-
     );
 }

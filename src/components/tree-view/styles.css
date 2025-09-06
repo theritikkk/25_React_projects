@@ -1,22 +1,26 @@
 .menu-list-container {
     list-style: none;
-    margin-top: 0px;
-    margin-bottom: 0px;
-
+    margin: 0;
+    padding-left: 20px; /* indent children */
 }
 
 .tree-view-container {
     min-height: 100vh;
     width: 350px;
     background: rgb(0, 71, 110);
-
+    padding: 10px;
 }
 
 .menu-item {
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between; /* space between label and icon */
+    gap: 10px;
     cursor: pointer;
     color: white;
-    
+    padding: 5px 10px;
+}
+
+.menu-item p {
+    margin: 0;
 }

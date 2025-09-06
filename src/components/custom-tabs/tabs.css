@@ -35,5 +35,5 @@
     height: 300px;
     overflow: auto;
     background-color: #fff;
-    
+    color: red; /* moved from inline style */
 }

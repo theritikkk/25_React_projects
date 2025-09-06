@@ -1,65 +1,67 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import User from "./user";
-import './style.css'
-
-
+import './style.css';
 
 export default function GithubProfileFinder() {
     
-    const [userName, setUserName] = useState('theritikkk');
+    const [userName, setUserName] = useState('theritikkk'); // default username
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    function handleSubmit() {
-        fetchGithubUserData()
-    }
+    const [error, setError] = useState(null); // added for error handling
 
     async function fetchGithubUserData() {
-        const res = await fetch(`https://api.github.com/users/${userName}`)
+        try {
+            setLoading(true);
+            setError(null);
 
-        const data = await res.json();
+            const res = await fetch(`https://api.github.com/users/${userName}`);
+            
+            if (!res.ok) {
+                throw new Error("User not found or API error");
+            }
 
-        if(data) {
-            setUserData(data)
-            setLoading(false)
+            const data = await res.json();
+            setUserData(data);
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+            setUserData(null);
+        } finally {
+            setLoading(false);
         }
-
-        console.log(data)
-
     }
 
-    useEffect( () => {
-        
-        fetchGithubUserData()
-
-    }, [])
-
-    if(loading) {
-        return <h1> Loading data ! Please wait. </h1>
+    function handleSubmit() {
+        fetchGithubUserData();
     }
 
+    useEffect(() => {
+        fetchGithubUserData();
+    }, []); // fetch default user on mount
 
-    return  <div className="github-profile-container">
+    if (loading) {
+        return <h1>Loading data! Please wait...</h1>;
+    }
 
-        <div className="input-wrapper">
+    if (error) {
+        return <h1>Error: {error}</h1>;
+    }
 
-            <input 
-            name="search-by-username"
-            type="text"
-            placeholder="Search Github Username..."
-            value={userName}
-            onChange={ (event) => setUserName(event.target.value) }
-            />
+    return (
+        <div className="github-profile-container">
 
-            <button onClick = { handleSubmit } >
-                Search
-            </button>
+            <div className="input-wrapper">
+                <input 
+                    name="search-by-username"
+                    type="text"
+                    placeholder="Search Github Username..."
+                    value={userName}
+                    onChange={(event) => setUserName(event.target.value)}
+                />
+                <button onClick={handleSubmit}>Search</button>
+            </div>
 
+            {userData && <User user={userData} />}
         </div>
-
-        {
-            userData !== null ? <User user={userData} /> : null
-        }
-
-    </div>
+    );
 }

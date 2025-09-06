@@ -1,7 +1,13 @@
 .active {
-    color: #fff700;
+    color: #fff700; /* Yellow color for active stars */
 }
 
 .inactive {
-    color: black;
+    color: black; /* Black color for inactive stars */
+}
+
+.star-rating {
+    display: flex;
+    gap: 5px; /* Add spacing between stars */
+    cursor: pointer;
 }

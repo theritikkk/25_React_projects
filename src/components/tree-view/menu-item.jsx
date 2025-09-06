@@ -1,42 +1,39 @@
-import { useState } from "react"
-import MenuList from "./menu-list"
-import {FaMinus, FaPlus} from 'react-icons/fa'
+import { useState } from "react";
+import MenuList from "./menu-list";
+import { FaMinus, FaPlus } from 'react-icons/fa';
 
-export default function MenuItem( {item} ) {
-
+export default function MenuItem({ item }) {
     const [displayCurrentChildren, setDisplayCurrentChildren] = useState({});
 
-    function handleToggleChildren(getCurrentLevel) {
-
-        setDisplayCurrentChildren({
-            ...displayCurrentChildren, 
-            [getCurrentLevel] : !displayCurrentChildren[getCurrentLevel],
-        });
-
+    // Toggle display of children for a given menu item
+    function handleToggleChildren(label) {
+        setDisplayCurrentChildren(prev => ({
+            ...prev,
+            [label]: !prev[label],
+        }));
     }
 
-    console.log(displayCurrentChildren);
+    return (
+        <li>
+            <div className="menu-item">
+                <p>{item.label}</p>
 
-    return <li> 
-        <div className="menu-item">
-            <p> {item.label} </p>
+                {
+                    item.children && item.children.length > 0 && (
+                        <span onClick={() => handleToggleChildren(item.label)}>
+                            {displayCurrentChildren[item.label] 
+                                ? <FaMinus color="#fff" size={20} /> 
+                                : <FaPlus color="#fff" size={20} />}
+                        </span>
+                    )
+                }
+            </div>
+
             {
-                item && item.children && item.children.length ? 
-                (
-                    <span onClick={ () => handleToggleChildren(item.label) }>
-                        {
-                            displayCurrentChildren[item.label] ? <FaMinus color="#fff" size={25} /> : <FaPlus color="#fff" size={25} />
-                        }
-                    </span> 
+                item.children && item.children.length > 0 && displayCurrentChildren[item.label] && (
+                    <MenuList list={item.children} />
                 )
-                : null
             }
-        </div>
-
-        {
-            item && item.children && item.children.length > 0 && displayCurrentChildren[item.label] ?(
-            <MenuList list={item.children} />
-            ) : null
-        }
-    </li>  
+        </li>
+    );
 }
