@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import User from "./user";
 import './style.css';
 
@@ -7,9 +7,10 @@ export default function GithubProfileFinder() {
     const [userName, setUserName] = useState('theritikkk'); // default username
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); // added for error handling
+    const [error, setError] = useState(null);
 
-    async function fetchGithubUserData() {
+    // useCallback ensures fetchGithubUserData has a stable reference for useEffect
+    const fetchGithubUserData = useCallback(async () => {
         try {
             setLoading(true);
             setError(null);
@@ -29,27 +30,22 @@ export default function GithubProfileFinder() {
         } finally {
             setLoading(false);
         }
-    }
+    }, [userName]); // dependency: userName
 
     function handleSubmit() {
         fetchGithubUserData();
     }
 
+    // Fetch default user on mount and whenever userName changes if needed
     useEffect(() => {
         fetchGithubUserData();
-    }, []); // fetch default user on mount
+    }, [fetchGithubUserData]);
 
-    if (loading) {
-        return <h1>Loading data! Please wait...</h1>;
-    }
-
-    if (error) {
-        return <h1>Error: {error}</h1>;
-    }
+    if (loading) return <h1>Loading data! Please wait...</h1>;
+    if (error) return <h1>Error: {error}</h1>;
 
     return (
         <div className="github-profile-container">
-
             <div className="input-wrapper">
                 <input 
                     name="search-by-username"
